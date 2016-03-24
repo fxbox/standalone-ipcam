@@ -102,7 +102,10 @@ app.get('/image/jpeg.cgi', function (req, res) {
       console.log('snapshot_cmd  =', snapshot_cmd);
       console.log('snapshot_args =', snapshot_args);
   }
+  var start_time = Date.now();
   var result = spawnSync(snapshot_cmd, snapshot_args);
+  var end_time = Date.now();
+  console.log('Took', (end_time - start_time) / 1000, 'seconds to take a snapshot');
   if (result.status != 0) {
       res.status(500).type('html').send(
           '<html>' +
