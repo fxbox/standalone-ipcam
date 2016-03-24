@@ -28,12 +28,12 @@ class IpCameraUpnpServer extends upnpServer {
         };
 		super(ipcam_config);
   		this._server.addUSN('urn:cellvision:service:Null:1');
-  		console.log("im constructed", ip, udn);
+  		//console.log("im constructed", ip, udn);
 	}
 
-	startServer (something) {
-  		console.log(something + " upnp simulation started");
-  		super.startServer(something);
+	startServer (label) {
+  		console.log(label, 'started');
+  		super.startServer(label);
 	}
 }
 
