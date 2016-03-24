@@ -23,7 +23,7 @@ if ('help' in opt.options) {
 
 if ('sim' in opt.options) {
     ip = '127.0.0.1';
-    mac = 'aaaaaaaa';
+    mac = 'aaaaaaaaaaaa';
 } else {
     var get_address = require('./get_address.js');
 
@@ -31,7 +31,7 @@ if ('sim' in opt.options) {
     ip = addrs[0]
     mac = addrs[1].replace(/:/g, '');
 }
-var udn = 'uuid:18db9b78-f188-11e5-9ce9-0000' + mac;
+var udn = 'uuid:18db9b78-f188-11e5-9ce9-' + mac;
 var port = 8100;
 
 console.log('Our IP Address =', ip, mac);
@@ -77,7 +77,7 @@ app.get('/image/jpeg.cgi', function (req, res) {
   if ('sim' in opt.options) {
     res.status(200).sendFile(path.join(__dirname, 'colville.jpg'));
   } else {
-      res.status(200).type('ascii').send('Not running the simulator');
+    res.status(200).type('ascii').send('Not running the simulator');
   }
 })
 
