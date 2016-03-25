@@ -8,6 +8,7 @@ var GetOpt = require('node-getopt');
 var getopt = new GetOpt([
   ['',  'sim',              'Behave like an IP Camera Simulator' ],
   ['d', 'device=ARG',       'Specify camera device (i.e. /dev/video1)'],
+  ['n', 'name=ARG',         'Set camera name'],
   ['r', 'resolution=ARG',   'Specify resolution (i.e. 1280x720)'],
   ['h', 'help',             'Display help' ],
   ['v', 'verbose',          'Show verbose output' ],
@@ -40,7 +41,9 @@ if (opt.options.sim) {
 var udn = 'uuid:18db9b78-f188-11e5-9ce9-' + mac;
 var port = 8100;
 
-console.log('Our IP Address =', ip, 'port =', port, 'UDN =', udn);
+var camera_name = opt.options.name || 'Link IpCam';
+
+console.log('Our IP Address =', ip, 'port =', port, 'UDN =', udn, 'name =', camera_name);
 
 var upnp_ipcamera = require('./upnp_ipcamera.js');
 
@@ -59,7 +62,7 @@ app.get('/', function (req, res) {
         '<URLBase>http://' + ip + ':' + port + '</URLBase>' +
         '<device>' +
           '<deviceType>urn:schemas-upnp-org:device:Basic:1.0</deviceType>' +
-          '<friendlyName>Link IpCam(' + ip + ':' + port + ')</friendlyName>' +
+          '<friendlyName>' + camera_name + '(' + ip + ':' + port + ')</friendlyName>' +
           '<manufacturer>Project-Link</manufacturer>' +
           '<modelDescription>Wireless Internet Camera</modelDescription>' +
           '<modelName>Link-IpCamera</modelName>' +
